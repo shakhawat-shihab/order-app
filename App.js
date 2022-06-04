@@ -1,9 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Image, Button, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Button, Alert, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
 import Text from './src/components/Text/Text';
 import { color } from './src/theme/color';
 import { spacing } from './src/theme/spacing';
+import Home from './src/screens/Home/Home';
+import Item from './src/screens/Item/Item';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 export default function App() {
   const [loaded] = useFonts({
     SFPro_Regular: require("./src/fonts/SFPro_Regular.ttf"),
@@ -11,39 +17,14 @@ export default function App() {
   });
 
   return (
-    <View style={styles.container}>
-      <View style={styles.upperSection}>
-      </View>
-      <View style={styles.lowerSection}>
-        <View style={styles.imageContainer}>
-          <View style={styles.imageDesign} >
-            <Image source={require('./assets/favicon.png')} />
-          </View>
-        </View>
 
-        <Text preset='h1' style={{ color: color.headingColor, fontWeight: 'bold', textAlign: 'center' }}> Non-Contact  Deliveries</Text>
-        <Text preset='small' style={{ color: color.paragraphColor, textAlign: 'center', marginVertical: spacing[6] }}>
-          Whe placing an order, select the option “Contactless delivery” and the courier will leave your order at the door.
-        </Text>
-        <View style={{ marginVertical: spacing[8], }}>
-          <TouchableOpacity
-            style={styles.buttonDesign}
-            backgroundColor={color.green}
-          // onPress={onPress}
-          >
-            <Text preset='small' style={styles.buttonText}>Order Now</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.buttonDesign, { backgroundColor: color.white, marginTop: spacing[4] }]}
-          // onPress={onPress}
-          >
-            <Text preset='small' style={[styles.buttonText, { color: color.paragraphColor }]}>Dismiss</Text>
-          </TouchableOpacity>
-        </View>
-
-
-      </View>
-    </View >
+    < NavigationContainer theme={DarkTheme} >
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home Screen" component={Home} />
+        <Stack.Screen name="Item Screen" component={Item} />
+      </Stack.Navigator>
+      <StatusBar style='dark' />
+    </NavigationContainer >
   );
 }
 
@@ -51,46 +32,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: color.purple,
-  },
-  upperSection: {
-    height: '40%'
-  },
-  lowerSection: {
-    backgroundColor: color.white,
-    height: '60%',
-    paddingHorizontal: spacing[7],
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50
-  },
-  imageContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing[1],
-    // backgroundColor: 'red',
-    height: '30%'
-  },
-  imageDesign: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // backgroundColor: 'white',
-    // padding: spacing[2]
-    backgroundColor: 'white',
-    padding: 30,
-    borderRadius: 60
-  },
-  buttonDesign: {
-    paddingVertical: spacing[4],
-    backgroundColor: color.green,
-    alignItems: 'center',
-
-    borderRadius: spacing[2]
-  },
-  buttonText: {
-    color: color.white,
-    textTransform: 'uppercase',
-    fontWeight: '700',
-    letterSpacing: 1
   }
-
-
 });
