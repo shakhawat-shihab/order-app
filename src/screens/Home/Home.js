@@ -1,26 +1,25 @@
 import React from 'react';
-import { StyleSheet, View, Image, Button, Alert, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Image, Button, Alert, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import Text from '../../components/Text/Text';
 import { color } from '../../theme/color';
 import { spacing } from '../../theme/spacing';
 import { StatusBar } from 'expo-status-bar';
 const Home = ({ navigation }) => {
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.upperSection}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}  style={styles.container}>
+            <View style={[styles.upperSection, {}]}>
                 <View  >
                     <Image style={styles.userImage} source={require('../../../src/images/LOGO.png')}  ></Image>
                 </View>
 
             </View>
             <View style={styles.lowerSection}>
-                <View style={styles.imageContainer}>
+                <View style={[styles.imageContainer, {}]}>
                     <View style={styles.imageDesign} >
                         <Image source={require('../../../assets/favicon.png')} />
                     </View>
                 </View>
-
-                <Text preset='h1' style={{ color: color.headingColor, fontWeight: 'bold', textAlign: 'center' }}> Non-Contact  Deliveries</Text>
+                <Text preset='h1' style={{ color: color.headingColor, fontWeight: 'bold', textAlign: 'center',marginTop:spacing[4] }}> Non-Contact  Deliveries</Text>
                 <Text preset='small' style={{ color: color.paragraphColor, textAlign: 'center', marginVertical: spacing[6] }}>
                     Whe placing an order, select the option “Contactless delivery” and the courier will leave your order at the door.
                 </Text>
@@ -42,28 +41,29 @@ const Home = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </SafeAreaView >
+        </ScrollView >
     );
 };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: color.purple,
+        flexDirection: 'column',
     },
     upperSection: {
-        height: '40%',
+        height: 350,
         paddingHorizontal: spacing[7],
+        backgroundColor:color.purple
     },
     userImage: {
         marginTop: spacing[10],
-        // borderRadius: 50,
         width: 100,
-        height: 100
     },
     lowerSection: {
         backgroundColor: color.white,
-        height: '60%',
+        marginTop:-50,
+        flex: 1,
         paddingHorizontal: spacing[7],
+        paddingVertical: spacing[8],
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50,
         // backgroundColor: 'red',
@@ -73,22 +73,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: spacing[1],
         // backgroundColor: 'red',
-        height: '30%'
+        // height: '30%'
     },
     imageDesign: {
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // backgroundColor: 'white',
-        // padding: spacing[2]
         backgroundColor: 'white',
         padding: 30,
         borderRadius: 60
     },
     buttonContainer: {
         marginVertical: spacing[7],
-        flex: 1,
+        // flex: 1,
         flexDirection: 'column',
-        justifyContent: 'flex-end'
+        // justifyContent: 'flex-end'
     },
     buttonDesign: {
         paddingVertical: spacing[4],
